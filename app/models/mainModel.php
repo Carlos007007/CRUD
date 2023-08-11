@@ -62,26 +62,23 @@
 
 		/*----------  Funcion para ejecutar una consulta INSERT preparada  ----------*/
 		protected function guardarDatos($tabla,$datos){
+
 			$query="INSERT INTO $tabla (";
+
 			$C=0;
 			foreach ($datos as $clave){
-				if($C<=0){
-					$query.=$clave["campo_nombre"];
-				}else{
-					$query.=",".$clave["campo_nombre"];
-				}
+				if($C>=1){ $query.=","; }
+				$query.=$clave["campo_nombre"];
 				$C++;
 			}
 			
 			$query.=") VALUES(";
-			$Z=0;
+
+			$C=0;
 			foreach ($datos as $clave){
-				if($Z<=0){
-					$query.=$clave["campo_marcador"];
-				}else{
-					$query.=",".$clave["campo_marcador"];
-				}
-				$Z++;
+				if($C>=1){ $query.=","; }
+				$query.=$clave["campo_marcador"];
+				$C++;
 			}
 
 			$query.=")";
@@ -118,15 +115,13 @@
 
 		/*----------  Funcion para ejecutar una consulta UPDATE preparada  ----------*/
 		protected function actualizarDatos($tabla,$datos,$condicion){
+			
 			$query="UPDATE $tabla SET ";
 
 			$C=0;
 			foreach ($datos as $clave){
-				if($C<=0){
-					$query.=$clave["campo_nombre"]."=".$clave["campo_marcador"];
-				}else{
-					$query.=",".$clave["campo_nombre"]."=".$clave["campo_marcador"];
-				}
+				if($C>=1){ $query.=","; }
+				$query.=$clave["campo_nombre"]."=".$clave["campo_marcador"];
 				$C++;
 			}
 
